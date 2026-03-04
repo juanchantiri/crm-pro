@@ -1,0 +1,1195 @@
+/* /public/css/style.css */
+
+:root {
+    --primary-color: #4f46e5; /* Índigo vibrante */
+    --primary-hover: #4338ca;
+    --bg-color: #f3f4f6; /* Gris muy suave para el fondo */
+    --surface-color: #ffffff; /* Blanco para las tarjetas */
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --sidebar-bg: #111827;
+    --sidebar-text: #9ca3af;
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+/* Layout Principal usando CSS Grid */
+.app-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+.brand span { color: var(--primary-color); }
+
+.menu a {
+    text-decoration: none;
+    color: var(--sidebar-text);
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    transition: var(--transition);
+}
+.menu a:hover, .menu a.active {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.main-content {
+    padding: 35px 45px;
+    overflow-y: auto;
+}
+
+/* =========================================================
+   🖥️ TOPBAR PREMIUM (COMMAND CENTER HEADER)
+   ========================================================= */
+.topbar {
+    background: var(--surface-color);
+    padding: 28px 35px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02); /* Sombra ultra suave */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    position: relative;
+    overflow: hidden; /* Necesario para que la línea de luz no se salga */
+}
+
+/* El toque del Millón de Dólares: Línea de Gradiente Superior */
+.topbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), #38bdf8, #a855f7);
+}
+
+.greeting {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.greeting h1 { 
+    font-size: 1.65rem; 
+    font-weight: 800; 
+    letter-spacing: -0.02em; 
+    color: var(--text-main);
+    margin: 0;
+}
+
+.greeting p { 
+    font-size: 0.95rem; 
+    color: var(--text-muted); 
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Contenedor de botones a la derecha */
+.topbar > div:last-child {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+/* Botones Premium */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+    letter-spacing: 0.01em;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow); /* Efecto de brillo característico de SaaS modernos */
+}
+
+.btn-danger {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-danger:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-color: #fca5a5;
+    transform: translateY(-1px);
+}
+
+/* --- TABLERO KANBAN ENTERPRISE --- */
+
+.kanban-board {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 24px;
+    min-height: calc(100vh - 350px);
+    align-items: flex-start;
+    
+    /* LA SOLUCIÓN: Forzamos al tablero a ocupar el 100% de la sección madre */
+    width: 100%; 
+}
+
+.kanban-column {
+    /* LA MAGIA: '1 1 0' significa "Crece, encógete y divide el espacio en partes exactamente iguales" */
+    flex: 1 1 0; 
+    
+    min-width: 260px; /* Si la pantalla es muy chica, frena aquí y activa el scroll horizontal */
+    
+    /* Eliminamos el max-width para que en monitores gigantes las columnas rellenen TODO el espacio */
+    
+    background: #f1f5f9; 
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    padding: 16px; 
+    border: 1px solid #e2e8f0;
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.column-header h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+}
+
+.count-badge {
+    background: #e2e8f0;
+    color: var(--text-muted);
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 20px;
+}
+
+.kanban-cards {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espacio exacto entre tarjetas */
+    min-height: 50px; /* Área para soltar tarjetas cuando está vacía */
+}
+
+/* Ocultar scrollbar en las columnas para un look más limpio */
+.kanban-cards::-webkit-scrollbar { width: 4px; }
+.kanban-cards::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+/* --- TARJETAS (OBJETOS FÍSICOS) --- */
+.k-card {
+    background: #ffffff; /* Blanco puro */
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Sombra inicial muy sutil */
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.k-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Se levanta de la columna */
+    border-color: #cbd5e1;
+}
+
+.k-card:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.k-card-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+}
+
+.k-card-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.k-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.btn-action {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    width: 28px;
+    height: 28px;
+    border-radius: 4px; /* Cuadrados con bordes suaves en vez de círculos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    background: #f1f5f9;
+    color: var(--primary-color);
+}
+
+
+
+
+
+/* Widgets */
+/* --- WIDGETS DE MÉTRICAS (Dashboard) --- */
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.widget {
+    background: var(--surface-color);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: flex-start; /* Alineamos arriba */
+    gap: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.widget:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.widget-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px; /* Un cuadrado suave, no un círculo perfecto */
+    background: #e0e7ff; /* Fondo índigo súper claro */
+    color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.widget-icon.alert { 
+    background: #fee2e2; 
+    color: #ef4444; 
+}
+
+.widget-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.widget-info h3 { 
+    font-size: 0.85rem; 
+    color: var(--text-muted); 
+    font-weight: 500; 
+}
+
+.widget-info p { 
+    font-size: 1.8rem; /* Número mucho más grande y protagonista */
+    font-weight: 700; 
+    color: var(--text-main); 
+    letter-spacing: -0.02em;
+}
+/* Tabla */
+.data-section {
+    background: var(--surface-color);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    border: 1px solid var(--border-color);
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-table th {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.data-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+.data-table tbody tr:hover { background-color: #f9fafb; }
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: #e5e7eb;
+    color: #374151;
+}
+
+
+
+/* --- MODAL Y FORMULARIOS --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.4); /* Slate oscuro con baja opacidad */
+    backdrop-filter: blur(12px); /* Blur muy fuerte estilo Apple */
+    -webkit-backdrop-filter: blur(12px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Previene que el modal toque los bordes en móviles */
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    padding: 32px; /* Más aire interno */
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Sombra masiva para despegar del fondo */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+}
+
+@keyframes modalPop {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.close-btn { font-size: 1.8rem; cursor: pointer; color: var(--text-muted); transition: var(--transition); }
+.close-btn:hover { color: #ef4444; }
+
+
+
+/* --- FORMULARIOS PREMIUM (Inputs y Selects) --- */
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text-muted); /* Color sutil para la etiqueta */
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1; /* Slate 300 */
+    background-color: #f8fafc; /* Fondo apenas grisado para descansar la vista */
+    color: var(--text-main);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+/* El famoso "Focus Ring" de las apps modernas */
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); /* Anillo índigo transparente */
+}
+
+.form-group input::placeholder, 
+.form-group textarea::placeholder {
+    color: #94a3b8; /* Placeholder elegante */
+}
+
+.notes-container {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.note-item {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+.note-item p { font-size: 0.95rem; line-height: 1.4; margin-bottom: 5px; }
+.note-item small { color: var(--text-muted); font-size: 0.8rem; display: block; }
+
+/* Scrollbar personalizado para las notas */
+.notes-container::-webkit-scrollbar { width: 6px; }
+.notes-container::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+.task-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: var(--transition);
+}
+.task-card:hover { border-color: var(--primary-color); transform: scale(1.02); }
+.task-info h4 { font-size: 1rem; margin-bottom: 5px; color: var(--text-main); }
+.task-info p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
+.task-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: rgba(79, 70, 229, 0.1);
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+
+/* --- ESTILOS DE AJUSTES --- */
+.settings-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px; 
+}
+.settings-card { 
+    background: white; 
+    padding: 25px; 
+    border-radius: var(--radius); 
+    border: 1px solid var(--border-color); 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02); 
+}
+.settings-card h3 { 
+    margin-bottom: 20px; 
+    color: var(--text-main); 
+    font-size: 1.1rem; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- SKELETON LOADERS (a11y & UX) --- */
+.skeleton {
+    background: #e2e8f0;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+    color: transparent !important;
+    pointer-events: none;
+    min-height: 20px;
+}
+@keyframes shine {
+    to { background-position-x: -200%; }
+}
+
+/* Úsalo en HTML así: <p id="totalClientesCount" class="skeleton" aria-busy="true">0000</p> */
+
+/* =========================================================
+   VISTA DEDICADA: DIRECTORIO DE CLIENTES (PREMIUM)
+   ========================================================= */
+
+.toolbar-enterprise {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 20px;
+    background: var(--surface-color);
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Buscador con Sombra y Hover */
+.search-wrapper {
+    flex: 1;
+    position: relative;
+    max-width: 500px;
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 12px 16px 12px 45px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: #f8fafc;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    outline: none;
+    transition: var(--transition);
+}
+
+.search-wrapper input:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+.search-wrapper input:focus {
+    border-color: var(--primary-color);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* --- EL SELECT CUSTOMIZADO (¡Chau diseño por defecto!) --- */
+.filters-wrapper select {
+    appearance: none; /* Elimina el estilo feo del navegador */
+    -webkit-appearance: none;
+    background-color: #f8fafc;
+    border: 1px solid var(--border-color);
+    padding: 12px 45px 12px 16px; /* Espacio extra a la derecha para la flechita */
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition);
+    
+    /* Magia Negra: Flechita personalizada inyectada por CSS (SVG) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+}
+
+.filters-wrapper select:hover {
+    border-color: #cbd5e1;
+    background-color: #ffffff;
+}
+
+.filters-wrapper select:focus {
+    border-color: var(--primary-color);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* La Tabla Premium */
+.table-container {
+    background: var(--surface-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden; 
+}
+
+.enterprise-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.enterprise-table th {
+    background: #f8fafc; /* Gris ultra claro para la cabecera */
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.enterprise-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    transition: background-color 0.2s ease;
+}
+
+.enterprise-table tr:last-child td {
+    border-bottom: none;
+}
+
+.enterprise-table tr:hover td {
+    background: #f8fafc; /* Resalta levemente la fila al pasar el mouse */
+}
+
+/* Componente de Perfil (Avatar + Info) */
+.client-profile-cell {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar-initials {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    /* Un gradiente sutil lo hace ver mil veces más profesional */
+    background: linear-gradient(135deg, var(--primary-light), #c7d2fe);
+    color: var(--primary-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    border: 2px solid #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.client-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    color: var(--text-main);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.client-info span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Badges de Estado Específicos */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+.status-nuevo { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
+.status-contactado { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+.status-negociacion { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+.status-cerrado { background: #dcfce3; color: #166534; border: 1px solid #bbf7d0; }
+
+
+
+
+
+
+
+/* =========================================================
+   VISTA DEDICADA: GESTIÓN DE TAREAS
+   ========================================================= */
+
+.tasks-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    align-items: start;
+}
+
+.task-lane {
+    background: #f8fafc; /* Gris muy suave para delimitar la columna */
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.lane-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lane-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* El "Ticket" de la Tarea */
+.task-ticket {
+    background: var(--surface-color);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    gap: 16px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.task-ticket:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: #cbd5e1;
+}
+
+/* Checkbox Interactivo Premium */
+.task-checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    color: transparent; /* Oculta el check por defecto */
+}
+
+.task-ticket:hover .task-checkbox {
+    border-color: #10b981; /* Se pone verde al hacer hover en la tarjeta */
+}
+
+.task-checkbox:hover {
+    background: #10b981;
+    border-color: #10b981;
+    color: white; /* Muestra el check */
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Contenido de la Tarea */
+.task-details {
+    flex: 1;
+}
+
+.task-details h4 {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.task-details p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.task-date-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: var(--text-muted);
+}
+
+.task-date-badge.urgente {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.task-date-badge.hoy {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+
+
+
+
+
+/* =========================================================
+   🔔 SISTEMA DE NOTIFICACIONES PREMIUM (TOASTS)
+   ========================================================= */
+
+#toastContainer {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none; /* Evita que el contenedor bloquee clics */
+}
+
+.toast-premium {
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-width: 300px;
+    max-width: 400px;
+    
+    /* Animación de entrada */
+    transform: translateX(120%);
+    opacity: 0;
+    animation: toastSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto; /* Reactiva los clics en la notificación */
+}
+
+/* Animación de salida */
+.toast-premium.closing {
+    animation: toastFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideIn {
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toastFadeOut {
+    to { opacity: 0; transform: translateY(20px) scale(0.95); }
+}
+
+/* Iconos de la notificación */
+.toast-icon { 
+    font-size: 1.4rem; 
+    margin-top: 2px;
+}
+.toast-icon.success { color: #10b981; } /* Esmeralda */
+.toast-icon.error { color: #ef4444; }   /* Rojo */
+.toast-icon.warning { color: #f59e0b; } /* Ámbar */
+.toast-icon.info { color: #3b82f6; }    /* Azul */
+
+.toast-content { flex: 1; }
+
+.toast-title {
+    font-weight: 700;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.toast-message {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* La barrita de progreso temporal en la base */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    /* Dura exactamente 3 segundos que es el tiempo que está en pantalla */
+    animation: toastProgress 3s linear forwards; 
+}
+
+/* Colores de la barrita según el tipo */
+.toast-premium[data-type="success"] .toast-progress { background: #10b981; }
+.toast-premium[data-type="error"] .toast-progress { background: #ef4444; }
+.toast-premium[data-type="warning"] .toast-progress { background: #f59e0b; }
+.toast-premium[data-type="info"] .toast-progress { background: #3b82f6; }
+
+@keyframes toastProgress {
+    to { width: 0%; }
+}
+
+/* Ajuste para Celulares: que el Toast salga desde abajo y ocupe el ancho */
+@media (max-width: 768px) {
+    #toastContainer {
+        bottom: 90px; /* Por encima de la barra de navegación nueva */
+        right: 16px;
+        left: 16px;
+    }
+    .toast-premium {
+        min-width: unset;
+        width: 100%;
+        transform: translateY(120%);
+    }
+    @keyframes toastSlideIn {
+        to { transform: translateY(0); opacity: 1; }
+    }
+}
+
+/* Ocultar Sidebar en móviles y convertir a menú hamburguesa (Concepto base) */
+/* =========================================================
+   📱 OPTIMIZACIÓN MOBILE (APP NATIVA UX)
+   ========================================================= */
+@media (max-width: 768px) {
+    /* 1. Ajuste del contenedor principal para dar espacio a la barra inferior */
+    .app-container {
+        grid-template-columns: 1fr;
+        padding-bottom: 80px; /* Evita que la barra tape el contenido */
+    }
+
+    /* 2. Transformación a "Bottom Navigation Bar" (Estilo iOS/Android) */
+    .sidebar {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 75px;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px); /* Efecto cristal */
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+        z-index: 1000;
+    }
+
+    /* Ocultamos el logo en la barra inferior */
+    .brand { display: none; }
+
+    /* Reestructuración de los botones de navegación */
+    .sidebar .menu {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0;
+    }
+
+    .sidebar .menu a {
+        flex-direction: column; /* Icono arriba, texto abajo */
+        gap: 6px;
+        padding: 10px 0;
+        margin: 0;
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        background: transparent;
+        border-radius: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .sidebar .menu a i { font-size: 1.3rem; }
+
+    /* Estado Activo en la barra inferior */
+    .sidebar .menu a.active {
+        color: var(--primary-color);
+        background: transparent;
+    }
+
+    /* 3. Ajustes de la cabecera (Topbar) */
+/* 3. CABECERA PREMIUM (EXECUTIVE HEADER) PARA MOBILE */
+    .main-content { padding: 15px; }
+    
+    .topbar {
+        background: var(--surface-color); /* Lo convertimos en una tarjeta blanca */
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Sombra elegante */
+        margin-bottom: 25px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .greeting {
+        display: flex;
+        flex-direction: column;
+        border-left: 4px solid var(--primary-color); /* Línea de acento corporativa */
+        padding-left: 14px; /* Separación de la línea */
+    }
+
+    .greeting h1 {
+        font-size: 1.35rem; /* Tipografía más compacta y nítida */
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 6px;
+        color: var(--text-main);
+    }
+
+    .greeting p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    /* Botonera Inteligente (Split buttons) */
+    .topbar > div:last-child { 
+        display: flex; 
+        flex-direction: row; /* Uno al lado del otro, no apilados */
+        gap: 10px; 
+        width: 100%; 
+    }
+    
+    .topbar .btn-primary { 
+        flex: 1; /* Se reparten el espacio 50/50 exacto */
+        justify-content: center; 
+        padding: 12px 10px; 
+        font-size: 0.85rem; /* Letra de botón adaptada a mobile */
+        border-radius: 10px;
+    }
+    /* 4. Kanban App-Like (Trello UX) */
+    .data-section {
+        padding: 20px 10px; /* Reducimos padding interno */
+    }
+
+    .kanban-board {
+        /* Desborda la pantalla para invitar al usuario a deslizar (Swipe) */
+        margin: 0 -10px; 
+        padding: 0 10px 20px 10px;
+        gap: 16px;
+        
+        /* Efecto Magnético (Snap Scrolling) */
+        scroll-snap-type: x mandatory; 
+        -webkit-overflow-scrolling: touch; /* Scroll ultra suave en iOS */
+    }
+
+    .kanban-column {
+        /* Cada columna ocupa casi toda la pantalla (85%) dejando ver un pedacito de la siguiente */
+        min-width: 85vw;
+        max-width: 85vw;
+        scroll-snap-align: center; /* La columna se imanta al centro de la pantalla al soltar el dedo */
+        flex: 0 0 auto;
+    }
+
+    /* 5. Ajustes de Grillas (Dashboards y Ajustes) */
+    .dashboard-widgets, .analytics-grid, .settings-layout {
+        grid-template-columns: 1fr; /* Todo a 1 sola columna vertical */
+    }
+
+    /* La botonera de Ajustes ya no es fija al costado, va arriba */
+    .settings-nav {
+        position: static;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scroll-snap-type: x mandatory;
+    }
+    .s-nav-item { flex: 0 0 auto; scroll-snap-align: start; }
+}

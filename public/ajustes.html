@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Sistema | CRM Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ajustes.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-chart-pie"></i>
+                <h2>CRM<span>Pro</span></h2>
+            </div>
+            <nav class="menu">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a>
+                <a href="tareas.html"><i class="fa-solid fa-calendar-check"></i> Tareas</a>
+                <a href="ajustes.html" class="active"><i class="fa-solid fa-gear"></i> Ajustes</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar" style="margin-bottom: 30px;">
+                <div class="greeting">
+                    <h1>Configuración General</h1>
+                    <p>Personaliza tu experiencia y gestiona las preferencias de tu cuenta.</p>
+                </div>
+            </header>
+
+            <div class="settings-layout">
+                <aside class="settings-nav">
+                    <a href="#perfil" class="s-nav-item active"><i class="fa-solid fa-id-card"></i> Perfil del Negocio</a>
+                    <a href="#suscripcion" class="s-nav-item"><i class="fa-solid fa-crown"></i> Plan y Facturación</a>
+                    <a href="#preferencias" class="s-nav-item"><i class="fa-solid fa-sliders"></i> Preferencias</a>
+                    <a href="#seguridad" class="s-nav-item danger"><i class="fa-solid fa-shield-halved"></i> Seguridad</a>
+                </aside>
+
+                <div class="settings-content">
+                    
+                    <div class="settings-card" id="perfil">
+                        <div class="card-header">
+                            <h3>Información del Negocio</h3>
+                            <p>Estos datos aparecerán en tus reportes y exportaciones.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-header-settings">
+                                <div class="avatar-large" id="avatarConfig">?</div>
+                                <div class="profile-text">
+                                    <h4 id="uiNombreNegocio">Cargando...</h4>
+                                    <span class="badge-status-online">Cuenta Activa</span>
+                                </div>
+                            </div>
+                            <div class="settings-form-grid">
+                                <div class="form-group">
+                                    <label>Nombre de la Empresa</label>
+                                    <input type="text" id="inputNombreNegocio" value="Empresa de Prueba" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Administrativo</label>
+                                    <input type="email" id="inputEmailNegocio" value="admin@empresa.com" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card" id="suscripcion">
+                        <div class="card-header">
+                            <h3>Suscripción y Límites</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="plan-hero-card">
+                                <div class="plan-info">
+                                    <span class="plan-label">Plan Actual</span>
+                                    <h2 id="uiPlanName">FREE</h2>
+                                    <p id="uiPlanExpiration" style="color: rgba(255,255,255,0.8); font-size: 0.85rem;"></p>
+                                </div>
+                                <button class="btn-upgrade-fancy" id="btnUpgradePro">
+                                    <i class="fa-solid fa-bolt"></i> Mejorar a PRO
+                                </button>
+                            </div>
+                            <div class="usage-bars" style="margin-top: 25px;">
+                                <div class="usage-item">
+                                    <div class="usage-text"><span>Almacenamiento de Clientes</span> <span>85%</span></div>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card" id="preferencias">
+                        <div class="card-header">
+                            <h3>Gestión de Datos y Privacidad</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <h4>Exportación Masiva</h4>
+                                    <p>Descarga todos tus clientes y contactos en formato CSV para Excel.</p>
+                                </div>
+                                <button class="btn-secondary-outline" id="btnExportar">
+                                    <i class="fa-solid fa-file-csv"></i> Exportar Todo
+                                </button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <h4>Notificaciones de Tareas</h4>
+                                    <p>Recibir alertas visuales cuando una tarea esté por vencer.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card danger-zone" id="seguridad">
+                        <div class="card-body">
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <h4 style="color: #dc2626;">Cerrar Sesión</h4>
+                                    <p>Finalizar tu sesión actual de forma segura.</p>
+                                </div>
+                                <button class="btn-danger-soft" id="btnCerrarSesionAjustes">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Salir del Sistema
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/ajustes-page.js"></script>
+</body>
+</html>

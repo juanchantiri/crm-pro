@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas | CRM Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-chart-pie"></i>
+                <h2>CRM<span>Pro</span></h2>
+            </div>
+            <nav class="menu">
+                <a href="index.html" id="navDashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="clientes.html" id="navClientes"><i class="fa-solid fa-users"></i> Clientes</a>
+                <a href="tareas.html" id="navTareas" class="active"><i class="fa-solid fa-calendar-check"></i> Tareas</a>
+                <a href="ajustes.html" id="navAjustes"><i class="fa-solid fa-gear"></i> Ajustes</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar" style="margin-bottom: 30px;">
+                <div class="greeting">
+                    <h1>Centro de Operaciones</h1>
+                    <p>Tus recordatorios y gestiones pendientes organizadas por urgencia.</p>
+                </div>
+                <button class="btn-primary" id="btnNuevaTareaGral" style="box-shadow: var(--shadow-md);">
+                    <i class="fa-solid fa-plus"></i> Nueva Tarea Manual
+                </button>
+            </header>
+
+            <div class="tasks-dashboard">
+                
+                <div class="task-lane" id="lane-vencidas">
+                    <h3 class="lane-title" style="color: #dc2626;"><i class="fa-solid fa-triangle-exclamation"></i> Urgentes / Vencidas</h3>
+                    <div class="lane-content" id="listaVencidas">
+                        </div>
+                </div>
+
+                <div class="task-lane" id="lane-hoy">
+                    <h3 class="lane-title" style="color: #0284c7;"><i class="fa-solid fa-bolt"></i> Para Hoy</h3>
+                    <div class="lane-content" id="listaHoy">
+                        </div>
+                </div>
+
+                <div class="task-lane" id="lane-proximas">
+                    <h3 class="lane-title" style="color: var(--text-muted);"><i class="fa-solid fa-calendar-days"></i> Próximas</h3>
+                    <div class="lane-content" id="listaProximas">
+                        </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/tareas-page.js"></script>
+</body>
+</html>

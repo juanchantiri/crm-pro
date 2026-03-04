@@ -1,0 +1,6 @@
+RewriteEngine On
+# Si el archivo o directorio no existe físicamente...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...mandar toda la petición al index.php
+RewriteRule ^(.*)$ index.php [QSA,L]

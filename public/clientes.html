@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Clientes | CRM Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-chart-pie"></i>
+                <h2>CRM<span>Pro</span></h2>
+            </div>
+         <nav class="menu">
+                <a href="index.html" id="navDashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="clientes.html" id="navClientes" class="active"><i class="fa-solid fa-users"></i> Clientes</a>
+                <a href="tareas.html" id="navTareas"><i class="fa-solid fa-calendar-check"></i> Tareas</a>
+                <a href="ajustes.html" id="navAjustes"><i class="fa-solid fa-gear"></i> Ajustes</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar" style="margin-bottom: 24px;">
+                <div class="greeting">
+                    <h1>Directorio de Clientes</h1>
+                    <p>Gestiona, filtra y analiza toda tu base de contactos.</p>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-primary" id="btnNuevoCliente" style="box-shadow: var(--shadow-md);">
+                        <i class="fa-solid fa-user-plus"></i> Añadir Cliente
+                    </button>
+                </div>
+            </header>
+
+            <div class="toolbar-enterprise">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="buscadorDirectorio" placeholder="Buscar por nombre, email o teléfono...">
+                </div>
+                <div class="filters-wrapper">
+                    <select id="filtroEstadoDirectorio">
+                        <option value="">Todos los estados</option>
+                        <option value="nuevo">Nuevos</option>
+                        <option value="negociacion">En Negociación</option>
+                        <option value="cerrado">Cerrados (Ganados)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="enterprise-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Contacto</th>
+                            <th>Interés / Negocio</th>
+                            <th>Estado</th>
+                            <th style="text-align: right;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyDirectorio">
+                        <tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando directorio...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+<div id="modalNotas" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Historial del Cliente</h2>
+                <span class="close-btn" id="cerrarModalNotas">&times;</span>
+            </div>
+            <div id="listaNotas" class="notes-container">
+                <p style="text-align:center; color:var(--text-muted);">Cargando historial...</p>
+            </div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border-color);">
+            <form id="formNuevaNota">
+                <input type="hidden" id="notaClientId">
+                <div class="form-group">
+                    <label>Agregar Nuevo Comentario</label>
+                    <textarea id="notaContenido" required placeholder="Escribe un detalle de la gestión..." 
+                        style="width: 100%; resize: vertical; min-height: 80px;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-save"></i> Guardar Historial
+                </button>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="js/clientes-page.js"></script>
+</body>
+</html>

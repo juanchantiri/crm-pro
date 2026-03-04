@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-CRM Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-chart-pie"></i>
+                <h2>CRM<span>Pro</span></h2>
+            </div>
+         <nav class="menu">
+                <a href="index.html" id="navDashboard" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="clientes.html" id="navClientes"><i class="fa-solid fa-users"></i> Clientes</a>
+                <a href="tareas.html" id="navTareas"><i class="fa-solid fa-calendar-check"></i> Tareas</a>
+                <a href="ajustes.html" id="navAjustes"><i class="fa-solid fa-gear"></i> Ajustes</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+    <header class="topbar">
+                <div class="greeting">
+                    <h1 id="greetingTitle">Cargando panel...</h1>
+                    <p>Aquí tienes el resumen de tu negocio hoy.</p>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-primary" id="btnExportar" style="background-color: #10b981; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);">
+                        <i class="fa-solid fa-file-excel"></i> Exportar CSV
+                    </button>
+                    <button class="btn-primary" id="btnNuevoCliente">
+                        <i class="fa-solid fa-plus"></i> Nuevo Cliente
+                    </button>
+                </div>
+            </header>
+
+            <section class="dashboard-widgets">
+                <div class="widget">
+                    <div class="widget-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="widget-info">
+                        <h3>Total Clientes</h3>
+                        <p id="totalClientesCount" class="skeleton" aria-busy="true">Cargando...</p>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="widget-icon alert"><i class="fa-solid fa-bell"></i></div>
+                    <div class="widget-info">
+                        <h3>Tareas Pendientes</h3>
+                        <p id="totalTareasCount" class="skeleton" aria-busy="true">Cargando...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="data-section" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                <div class="section-header">
+                    <h2>Pipeline de Ventas</h2>
+                    <div class="search-box" style="display: flex; gap: 10px;">
+                        <select id="filtroEtiquetas" style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); outline: none; font-weight: 600;">
+                            <option value="">🏷️ Todas las etiquetas</option>
+                        </select>
+                        
+                       <div style="position: relative;">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; top: 10px; color: var(--text-muted);"></i>
+                            <input type="text" id="inputBuscarCliente" placeholder="Buscar cliente..." style="padding: 8px 12px 8px 30px; border-radius: 8px; border: 1px solid var(--border-color); outline: none;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="kanban-board">
+                    <div class="kanban-column" id="col-nuevo" data-estado="nuevo">
+                        <div class="column-header">
+                            <h3>Nuevos Leads</h3>
+                            <span class="badge count-badge">0</span>
+                        </div>
+                        <div class="kanban-cards"></div> 
+                    </div>
+
+                    <div class="kanban-column" id="col-contactado" data-estado="contactado">
+                        <div class="column-header" style="border-top-color: #3b82f6;">
+                            <h3>Contactados</h3>
+                            <span class="badge count-badge">0</span>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+
+                    <div class="kanban-column" id="col-negociacion" data-estado="negociacion">
+                        <div class="column-header" style="border-top-color: #f59e0b;">
+                            <h3>En Negociación</h3>
+                            <span class="badge count-badge">0</span>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+
+                    <div class="kanban-column" id="col-cerrado" data-estado="cerrado">
+                        <div class="column-header" style="border-top-color: #10b981;">
+                            <h3>Venta Cerrada</h3>
+                            <span class="badge count-badge">0</span>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="data-section" style="margin-top: 30px;">
+                <div class="section-header">
+                    <h2>Próximas Gestiones</h2>
+                    <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary-color);"></i>
+                </div>
+                <div id="listaTareasProximas" class="tasks-grid">
+                    <p style="text-align:center; color:var(--text-muted); padding:20px;">Cargando tareas...</p>
+                </div>
+            </section>
+
+            <section class="chart-section" style="background: var(--surface-color); padding: 25px; border-radius: var(--radius); margin-bottom: 30px; border: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-top: 30px;">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h2 style="font-size: 1.2rem; color: var(--text-main);">Crecimiento de Cartera (Últimos 12 meses)</h2>
+                </div>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="graficoCrecimiento"></canvas>
+                </div>
+            </section>
+            
+            <div class="analytics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 30px;">
+                
+                <section class="chart-section" style="background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                    <div class="section-header" style="margin-bottom: 20px;">
+                        <h2 style="font-size: 1.1rem; color: var(--text-main);">Estado del Pipeline</h2>
+                    </div>
+                    <div style="position: relative; height: 250px; width: 100%; display: flex; justify-content: center;">
+                        <canvas id="graficoPipeline"></canvas>
+                    </div>
+                </section>
+
+                <section class="chart-section" style="background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                    <div class="section-header" style="margin-bottom: 20px;">
+                        <h2 style="font-size: 1.1rem; color: var(--text-main);">Adquisición por Canal</h2>
+                    </div>
+                    <div style="position: relative; height: 250px; width: 100%;">
+                        <canvas id="graficoCanales"></canvas>
+                    </div>
+                </section>
+
+            </div>
+
+   
+        </main>
+    </div>
+
+    <div id="modalNuevoCliente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Agregar Nuevo Cliente</h2>
+                <span class="close-btn" id="cerrarModal">&times;</span>
+            </div>
+            <form id="formNuevoCliente">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre *</label>
+                        <input type="text" id="cliNombre" required placeholder="Ej: Juan">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido *</label>
+                        <input type="text" id="cliApellido" required placeholder="Ej: Pérez">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="text" id="cliTelefono" placeholder="Ej: 2284123456">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="cliEmail" placeholder="juan@email.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>DNI / CUIT</label>
+                        <input type="text" id="cliDocumento">
+                    </div>
+                    <div class="form-group">
+                        <label>Origen</label>
+                        <select id="cliOrigen">
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="web">Sitio Web</option>
+                            <option value="referido">Referido</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-car-side" style="color: var(--primary-color);"></i> Vehículo / Póliza de interés</label>
+                        <input type="text" id="cliProducto" placeholder="Ej: VW Amarok V6 / Póliza Todo Riesgo">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-sack-dollar" style="color: #10b981;"></i> Monto / Capital ($)</label>
+                        <input type="number" id="cliMonto" placeholder="Ej: 15000000" step="0.01">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 15px;">
+                    <i class="fa-solid fa-save"></i> Guardar Cliente
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalNotas" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Historial de Seguimiento</h2>
+                <span class="close-btn" id="cerrarModalNotas">&times;</span>
+            </div>
+            <div id="listaNotas" class="notes-container">
+                <p style="text-align:center; color:var(--text-muted);">Cargando historial...</p>
+            </div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border-color);">
+            <form id="formNuevaNota">
+                <input type="hidden" id="notaClientId">
+                <div class="form-group">
+                    <label>Nueva Nota / Comentario</label>
+                    <textarea id="notaContenido" required placeholder="Escribe aquí lo que hablaste con el cliente..." 
+                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); resize: vertical; min-height: 80px;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-paper-plane"></i> Guardar Comentario
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalTarea" class="modal">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2>Programar Recordatorio</h2>
+                <span class="close-btn" id="cerrarModalTarea">&times;</span>
+            </div>
+            <form id="formNuevaTarea">
+                <input type="hidden" id="tareaClientId">
+                <div class="form-group">
+                    <label>¿Qué hay que hacer? *</label>
+                    <input type="text" id="tareaTitulo" required placeholder="Ej: Llamar para renovar póliza">
+                </div>
+                <div class="form-group">
+                    <label>Fecha y Hora *</label>
+                    <input type="datetime-local" id="tareaFecha" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción adicional</label>
+                    <textarea id="tareaDesc" placeholder="Detalles sobre la gestión..." style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-calendar-check"></i> Agendar Tarea
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalEtiquetas" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Asignar Etiqueta</h2>
+                <span class="close-btn" id="cerrarModalEtiqueta">&times;</span>
+            </div>
+            <form id="formNuevaEtiqueta">
+                <input type="hidden" id="etiquetaClientId">
+                <div class="form-group">
+                    <label>Nombre de la Etiqueta (Ej: VIP, Moroso)</label>
+                    <input type="text" id="etiquetaNombre" required placeholder="Escribe la etiqueta..." style="text-transform: uppercase;">
+                </div>
+                <div class="form-group">
+                    <label>Color</label>
+                    <div style="display: flex; gap: 10px; margin-top: 5px;">
+                        <input type="color" id="etiquetaColor" value="#ef4444" style="width: 50px; height: 40px; border: none; cursor: pointer;">
+                        <span style="align-self: center; color: var(--text-muted); font-size: 0.9rem;">Elige un color para destacar</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 15px;">
+                    <i class="fa-solid fa-tags"></i> Guardar Etiqueta
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
