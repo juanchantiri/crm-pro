@@ -32,9 +32,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // ELIMINAMOS LA LÓGICA DE AJUSTES QUE CAUSABA EL CRASH AQUÍ
         
-    } catch (e) {
+   } catch (e) {
         console.error("Error validando sesión:", e);
-        return; // Detiene la ejecución si no hay sesión
+        window.location.href = 'login.phtml'; // ¡Esta es la línea clave que te envía al login!
+        return; 
     }
 
     // 2. INICIALIZAR COMPONENTES UI
